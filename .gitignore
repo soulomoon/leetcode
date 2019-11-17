@@ -6,3 +6,4 @@ pc.stdout.log
 project/
 target/
 
+.idea
