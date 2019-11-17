@@ -1,0 +1,8 @@
+.vscode
+.build.sbt
+build.sbt
+ensime-langserver.log
+pc.stdout.log
+project/
+target/
+
