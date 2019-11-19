@@ -146,8 +146,9 @@ class Solution:
                 open_node = vect + d_vec
                 if open_node not in close_nodes and self.valid(open_node):
                     close_nodes.add(open_node)
-                    heapq.heappush(open_nodes, (open_node.distant(to) ,open_node))
+                    heapq.heappush(open_nodes, (open_node.distant(to), open_node))
         return False
+
 
 
 if __name__ == "__main__":
