@@ -3,7 +3,7 @@ from typing import List
 
 
 class Solution:
-    def isNStraightHand_ac(self, hand: List[int], W: int) -> bool:
+    def isNStraightHand(self, hand: List[int], W: int) -> bool:
         if len(hand) % W != 0:
             return False
         g_number = len(hand) // W
