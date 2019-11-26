@@ -4,31 +4,26 @@ import time
 class Solution:
     def uniqueLetterString(self, S: str) -> int:
         width = len(S)
-        subs = 0
+        total = 0
         left_idx = {}
         right_idx = {}
         mid_idx = {}
         for idx, char in enumerate(S):
-            left_idx.setdefault(char, None)
-            mid_idx.setdefault(char, None)
-            right_idx.setdefault(char, None)
-            left_idx[char] = mid_idx[char]
-            mid_idx[char] = right_idx[char]
+            left_idx[char] = mid_idx.get(char, None)
+            mid_idx[char] = right_idx.get(char, None)
             right_idx[char] = idx
 
+            total += (idx + 1) * (width - idx)
             # try to remove mid_idx element
-            if mid_idx[char] is not None:
-                subs += (mid_idx[char] + 1) * (width - right_idx[char])
-                if left_idx[char] is not None:
-                    subs += (left_idx[char] + 1) * (right_idx[char] - mid_idx[char])
+            if mid_idx.get(char, None) is not None:
+                total -= (mid_idx[char] + 1) * (width - right_idx[char])
+                if left_idx.get(char, None) is not None:
+                    total -= (left_idx[char] + 1) * (right_idx[char] - mid_idx[char])
 
         for char in right_idx:
             if mid_idx[char] is not None:
-                subs += (mid_idx[char] + 1) * (width - right_idx[char])
-        total = 0
-        for i in range(width):
-            total += (i + 1) * (width - i)
-        return total - subs
+                total -= (mid_idx[char] + 1) * (width - right_idx[char])
+        return total
 
 
 if __name__ == "__main__":
