@@ -7,7 +7,7 @@ m = (10 ** 9) + 7
 def get_count_both(A, r=True):
     stack = []
     res = [0 for _ in A]
-    cpm = (lambda a, b: a < b) if r else (lambda a, b: a <= b)
+    cpm = (lambda a, b: a < b) if r else (lambda a, b: a > b)
 
     def feed(right_end):
         old_idx = stack.pop()
