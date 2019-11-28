@@ -10,10 +10,8 @@ class Solution:
 class Palindrom:
     def __init__(self, left: int, rigtht: int):
         self.left = left
-        left_str = str(left)
-        right_str = str(rigtht)
-        middle = (len(left_str) + 1) // 2
-        end_middle = (len(right_str) + 1) // 2
+        middle = (len(str(left)) + 1) // 2
+        end_middle = (len(str(rigtht)) + 1) // 2
         self.start: int = 10 ** (middle - 1)
         self.limit: int = 10 ** end_middle
         self.rigtht: int = rigtht
