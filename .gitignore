@@ -5,5 +5,5 @@ ensime-langserver.log
 pc.stdout.log
 project/
 target/
-
+.ensime_cache
 .idea
