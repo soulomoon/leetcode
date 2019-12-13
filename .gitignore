@@ -7,3 +7,4 @@ project/
 target/
 .ensime_cache/
 .idea
+*__pycache__*
