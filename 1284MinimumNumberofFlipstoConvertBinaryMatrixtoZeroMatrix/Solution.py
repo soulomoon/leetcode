@@ -4,55 +4,32 @@ from typing import List
 direction = [(1, 0), (0, 1), (0, -1), (-1, 0), (0, 0)]
 
 
-def matrix_copy(mat: List[List[int]]):
-    m = []
-    for row in mat: m.append(row.copy())
-    return m
-
-
-def flip(x):
-    return 0 if x == 1 else 1
-
-
-def op(mat: List[List[int]], x, y, h, w):
-    for a, b in direction:
-        nx = a + x
-        ny = b + y
-        if w > nx >= 0 and h > ny >= 0:
-            mat[ny][nx] = flip(mat[ny][nx])
-
-
-def is_zero(mat):
-    for r in mat:
-        for i in r:
-            if i != 0:
-                return False
-    return True
-
-
 class Solution:
     def minFlips(self, mat: List[List[int]]) -> int:
         height = len(mat)
         width = len(mat[0])
         n = height * width
         mini = inf
+
+        def op(x, y):
+            for a, b in direction:
+                nx = a + x
+                ny = b + y
+                if width > nx >= 0 and height > ny >= 0:
+                    matcp[ny][nx] ^= 1
+
         for code in range(2 ** n):
-            matcp = matrix_copy(mat)
+            matcp = [row.copy() for row in mat]
             count = 0
             for i in range(n):
                 if 0X1 << i & code:
-                    x = i % width
-                    y = i // width
-                    op(matcp, x, y, height, width)
+                    op(i % width, i // width)
                     count += 1
-            if is_zero(matcp):
+            if all(all(i == 0 for i in row) for row in matcp):
                 mini = min(mini, count)
         return mini if mini != inf else -1
 
 
 if __name__ == "__main__":
-    # mat = [[0, 0], [0, 1]]
-    # mat = [[1, 1, 1], [1, 0, 1], [0, 0, 0]]
-    mat = [[1, 0, 0], [1, 0, 0]]
-    # print(0X1)
+    mat = [[0, 0], [0, 1]]
     print(Solution().minFlips(mat))
